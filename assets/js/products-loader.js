@@ -5,6 +5,7 @@
 
 import { db } from './firebase-config.js';
 import { collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { CATEGORIES_CONFIG } from './utils.js';
 
 function mapFirestoreProduct(doc) {
     const data = doc.data();
@@ -14,12 +15,12 @@ function mapFirestoreProduct(doc) {
         name: data.name || 'Producto',
         description: data.description || '',
         category,
-        categoryLabel: window.JLProducts?.CATEGORY_LABELS?.[category] || category,
+        categoryLabel: CATEGORIES_CONFIG[category]?.label || window.JLProducts?.CATEGORY_LABELS?.[category] || category,
         price: Number(data.price) || 0,
         salePrice: data.salePrice ? Number(data.salePrice) : null,
         priceNote: category === 'servicio' ? 'desde' : '',
         badge: data.badge || (category === 'servicio' ? 'Servicio' : ''),
-        icon: window.JLProducts?.CATEGORY_ICONS?.[category] || 'laptop',
+        icon: CATEGORIES_CONFIG[category]?.icon || window.JLProducts?.CATEGORY_ICONS?.[category] || 'laptop',
         image: data.image || '',
         stock: data.stock ?? 0
     };

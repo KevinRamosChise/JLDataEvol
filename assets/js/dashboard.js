@@ -15,6 +15,7 @@ import {
     orderBy,
     writeBatch
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { CATEGORIES_CONFIG, getDefaultImage, parseMoney as toMoney, escapeHtml } from './utils.js';
 
 const productsGrid = document.getElementById('products-grid');
 const addProductBtn = document.getElementById('add-product-btn');
@@ -27,24 +28,10 @@ const submitBtn = productForm?.querySelector('button[type="submit"]');
 
 let editingProductId = null;
 
-const CATEGORIES = [
-    { value: 'laptops', label: 'Laptops' },
-    { value: 'computadoras', label: 'Computadoras' },
-    { value: 'accesorios', label: 'Accesorios' },
-    { value: 'servicio', label: 'Servicio Técnico' }
-];
-
-const DEFAULT_IMAGES = {
-    laptops: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80',
-    computadoras: 'https://images.unsplash.com/photo-1587202372775-e229f172b9ae?w=600&q=80',
-    accesorios: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&q=80',
-    servicio: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd378a?w=600&q=80'
-};
-
-function toMoney(val) {
-    const n = Number.parseFloat(val);
-    return Number.isFinite(n) && n >= 0 ? Math.round(n * 100) / 100 : 0;
-}
+const CATEGORIES = Object.entries(CATEGORIES_CONFIG).map(([value, conf]) => ({
+    value,
+    label: conf.label
+}));
 
 function openAddProductModal() {
     editingProductId = null;
@@ -112,7 +99,7 @@ productForm?.addEventListener('submit', async (e) => {
 
     const category = document.getElementById('product-category').value;
     let image = document.getElementById('product-image').value.trim();
-    if (!image) image = DEFAULT_IMAGES[category] || '';
+    if (!image) image = getDefaultImage(category);
 
     const productData = {
         name: document.getElementById('product-name').value.trim(),
@@ -202,11 +189,6 @@ function updateStats(total, products) {
     }
 }
 
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text ?? '';
-    return div.innerHTML;
-}
 
 function renderAdminProduct(product) {
     const card = document.createElement('article');
@@ -215,7 +197,7 @@ function renderAdminProduct(product) {
     const price = product.salePrice && product.salePrice < product.price
         ? `<span class="dash-price-sale">S/ ${product.salePrice.toFixed(2)}</span> <s>S/ ${product.price.toFixed(2)}</s>`
         : `S/ ${(product.price || 0).toFixed(2)}`;
-    const img = product.image || DEFAULT_IMAGES[product.category] || 'assets/images/logo.png?v=2';
+    const img = product.image || getDefaultImage(product.category);
 
     card.innerHTML = `
         <img src="${escapeHtml(img)}" alt="" class="dash-product-card__img"
