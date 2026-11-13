@@ -3,8 +3,9 @@
 **Proyecto:** JL DATA PRO — Plataforma Web de Catálogo Comercial y Gestión de Inventario  
 **Organización / Empresa:** JL DATA PRO (Los Olivos, Lima - Perú)  
 **Autor / Responsable:** Kevin Ramos Chise  
+**Repositorio GitHub:** [https://github.com/KevinRamosChise/JLDataEvol](https://github.com/KevinRamosChise/JLDataEvol)  
 **Área:** Ingeniería de Software / Mantenimiento y Evolución de Sistemas  
-**Fecha:** Octubre 2026  
+**Fecha:** Octubre - Noviembre 2026  
 **Versión del Documento:** v1.2.0  
 
 ---

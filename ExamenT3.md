@@ -1,6 +1,7 @@
 # EVALUACIÓN T3 — MANTENIMIENTO Y EVOLUCIÓN DE SOFTWARE
 ## GUÍA MAESTRA DE DIAPOSITIVAS (MÁXIMO 10 SLIDES)
 **Proyecto:** Sistema Web Comercial y de Gestión de Inventario — JL DATA PRO  
+**Repositorio GitHub Oficial:** [https://github.com/KevinRamosChise/JLDataEvol](https://github.com/KevinRamosChise/JLDataEvol)  
 **Integrantes:** 5 Miembros | **Tiempo Límite:** 8 Minutos (~95 segundos por miembro)  
 **Tecnologías:** HTML5, CSS3 Modular, JS ES6+, Firebase Hosting, Firebase Auth, Cloud Firestore  
 **Formato:** Puntos directos para diapositivas (*Bullet points*), diagramas compactos y guion rápido de exposición.
